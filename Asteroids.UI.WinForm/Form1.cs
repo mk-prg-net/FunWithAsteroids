@@ -1,4 +1,39 @@
-﻿using System;
+﻿//<unit_header>
+//----------------------------------------------------------------
+//
+// Martin Korneffel: IT Beratung/Softwareentwicklung
+// Stuttgart, den 29.6.2017
+//
+//  Projekt.......: Asteroids.UI.WinForm
+//  Name..........: 
+//  Aufgabe/Fkt...: Graphische Benutzeroberfläche mit asynchronen Funktionen
+//                  zum lasen und analysieren der Asteroidendaten
+//
+//
+//
+//
+//<unit_environment>
+//------------------------------------------------------------------
+//  Zielmaschine..: PC 
+//  Betriebssystem: Windows 7 mit .NET 4.5
+//  Werkzeuge.....: Visual Studio 2013
+//  Autor.........: Martin Korneffel (mko)
+//  Version 1.0...: 
+//
+// </unit_environment>
+//
+//<unit_history>
+//------------------------------------------------------------------
+//
+//  Version.......: 1.1
+//  Autor.........: Martin Korneffel (mko)
+//  Datum.........: 
+//  Änderungen....: 
+//
+//</unit_history>
+//</unit_header>        
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,6 +110,12 @@ namespace Asteroids.UI.WinForm
 
             CollectedAsteroidsBindingSource.DataSource = collector.GetLast(20);
             CollectedAsteroidsBindingSource.ResetBindings(false);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var about = new About();
+            about.ShowDialog();
         }
     }
 }

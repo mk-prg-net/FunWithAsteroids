@@ -39,9 +39,9 @@
             this.progressBarMain = new System.Windows.Forms.ToolStripProgressBar();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageLog = new System.Windows.Forms.TabPage();
+            this.lbxLog = new System.Windows.Forms.ListBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.tabPageImport = new System.Windows.Forms.TabPage();
-            this.panImportCsvMain = new System.Windows.Forms.Panel();
-            this.CollectedAsteroidsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diameterInKmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,28 +49,30 @@
             this.distanceSunInAUDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.albedoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.CollectedAsteroidsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panImportCsvMain = new System.Windows.Forms.Panel();
             this.lblImportCsvCountAsteroids = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabPageQuery = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbxLog = new System.Windows.Forms.ListBox();
             this.UpdateCollectorCounterTimer = new System.Windows.Forms.Timer(this.components);
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageLog.SuspendLayout();
             this.tabPageImport.SuspendLayout();
-            this.panImportCsvMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).BeginInit();
+            this.panImportCsvMain.SuspendLayout();
             this.tabPageQuery.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(781, 24);
@@ -150,6 +152,23 @@
             this.tabPageLog.Text = "Logs";
             this.tabPageLog.UseVisualStyleBackColor = true;
             // 
+            // lbxLog
+            // 
+            this.lbxLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbxLog.FormattingEnabled = true;
+            this.lbxLog.Location = new System.Drawing.Point(3, 64);
+            this.lbxLog.Name = "lbxLog";
+            this.lbxLog.Size = new System.Drawing.Size(767, 344);
+            this.lbxLog.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(767, 61);
+            this.panel2.TabIndex = 0;
+            // 
             // tabPageImport
             // 
             this.tabPageImport.Controls.Add(this.dataGridView1);
@@ -161,20 +180,6 @@
             this.tabPageImport.TabIndex = 1;
             this.tabPageImport.Text = "Import CSV";
             this.tabPageImport.UseVisualStyleBackColor = true;
-            // 
-            // panImportCsvMain
-            // 
-            this.panImportCsvMain.Controls.Add(this.lblImportCsvCountAsteroids);
-            this.panImportCsvMain.Controls.Add(this.label1);
-            this.panImportCsvMain.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panImportCsvMain.Location = new System.Drawing.Point(3, 3);
-            this.panImportCsvMain.Name = "panImportCsvMain";
-            this.panImportCsvMain.Size = new System.Drawing.Size(767, 61);
-            this.panImportCsvMain.TabIndex = 0;
-            // 
-            // CollectedAsteroidsBindingSource
-            // 
-            this.CollectedAsteroidsBindingSource.DataSource = typeof(AsteroidsBL.IAsteroid);
             // 
             // dataGridView1
             // 
@@ -236,14 +241,19 @@
             this.albedoDataGridViewTextBoxColumn.Name = "albedoDataGridViewTextBoxColumn";
             this.albedoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // label1
+            // CollectedAsteroidsBindingSource
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "# erfasste Asteroiden";
+            this.CollectedAsteroidsBindingSource.DataSource = typeof(AsteroidsBL.IAsteroid);
+            // 
+            // panImportCsvMain
+            // 
+            this.panImportCsvMain.Controls.Add(this.lblImportCsvCountAsteroids);
+            this.panImportCsvMain.Controls.Add(this.label1);
+            this.panImportCsvMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panImportCsvMain.Location = new System.Drawing.Point(3, 3);
+            this.panImportCsvMain.Name = "panImportCsvMain";
+            this.panImportCsvMain.Size = new System.Drawing.Size(767, 61);
+            this.panImportCsvMain.TabIndex = 0;
             // 
             // lblImportCsvCountAsteroids
             // 
@@ -255,6 +265,15 @@
             this.lblImportCsvCountAsteroids.TabIndex = 1;
             this.lblImportCsvCountAsteroids.Text = "0";
             this.lblImportCsvCountAsteroids.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "# erfasste Asteroiden";
             // 
             // tabPageQuery
             // 
@@ -275,27 +294,17 @@
             this.panel1.Size = new System.Drawing.Size(767, 57);
             this.panel1.TabIndex = 0;
             // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(767, 61);
-            this.panel2.TabIndex = 0;
-            // 
-            // lbxLog
-            // 
-            this.lbxLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbxLog.FormattingEnabled = true;
-            this.lbxLog.Location = new System.Drawing.Point(3, 64);
-            this.lbxLog.Name = "lbxLog";
-            this.lbxLog.Size = new System.Drawing.Size(767, 344);
-            this.lbxLog.TabIndex = 1;
-            // 
             // UpdateCollectorCounterTimer
             // 
             this.UpdateCollectorCounterTimer.Interval = 300;
             this.UpdateCollectorCounterTimer.Tick += new System.EventHandler(this.UpdateCollectorCounterTimer_Tick);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.aboutToolStripMenuItem.Text = "about";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -315,10 +324,10 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageLog.ResumeLayout(false);
             this.tabPageImport.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).EndInit();
             this.panImportCsvMain.ResumeLayout(false);
             this.panImportCsvMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPageQuery.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -354,6 +363,7 @@
         private System.Windows.Forms.ListBox lbxLog;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Timer UpdateCollectorCounterTimer;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
