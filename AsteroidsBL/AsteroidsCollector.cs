@@ -90,7 +90,7 @@ namespace AsteroidsBL
         {
             lock (lockHandle)
             {
-                return _AsteroidCollection.Take(countAsteroids);
+                return _AsteroidCollection.Take(countAsteroids).ToArray();
             }
         }
     }
