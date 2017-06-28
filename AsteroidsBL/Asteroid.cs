@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AsteroidsDAL.CSV
+namespace AsteroidsBL
 {
     public class Asteroid : AsteroidsBL.IAsteroid
     {
@@ -33,6 +33,16 @@ namespace AsteroidsDAL.CSV
             _E = E;
             _OrbitalTime = OrbitalTime;
         }
+
+
+        public Asteroid(IAsteroid src)
+            : this(
+                  Name: src.Name,
+                  DistanceSunInAU: src.DistanceSunInAU,
+                  DiameterInKm: src.DiameterInKm,
+                  E: src.E,
+                  OrbitalTime: src.OrbitalTimeInEarthYears,
+                  Albedo: src.Albedo) {}
 
         public double Albedo
         {

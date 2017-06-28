@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 
+using AsteroidsBL;
+
 namespace AsteroidsDAL.CSV.Test
 {
     [TestClass]
@@ -20,12 +22,10 @@ namespace AsteroidsDAL.CSV.Test
         public void Init()
         {
             queue = new ConcurrentQueue<AsteroidsBL.IAsteroid>();
-            //while(!queue.IsEmpty)
-            //{
-            //    AsteroidsBL.IAsteroid a;
-            //    queue.TryDequeue(out a);
-            //}
 
+            // Startet Task, der regelmäßig die gefilterten 
+            // Asteroiden aus einer mulithrad- resistenten Queue
+            // abruft.
             Task.Run(() =>
             {
                 AsteroidsBL.IAsteroid a;
@@ -52,20 +52,25 @@ namespace AsteroidsDAL.CSV.Test
         [TestMethod]
         public async Task AsteroidsDAL_CSV_ReadCSV()
         {
-            var repository = new AsteroidsRepository(2000);
-            int i = 0;
+            // 1. Stufe: Einlesen der Asteroiden aus der CSV- Datei 
+            //    und erfassen im Sammler  
+            var collector = new AsteroidsCollector();
             try
             {
                 var reader = new AsteroidsCSVReader("Asteroids.csv", 2);
                 while (!reader.EOF)
                 {
                     var asteroid = reader.Read();
-                    repository.Add(asteroid);
-                    i++;
+                    collector.Add(asteroid);                    
                 }
 
-                Assert.IsTrue(repository.All.Count() > 0);
+                Assert.IsTrue(collector.Count > 0);
 
+                // 2. Stufe: Aus gesammelten Asteroiden ein
+                //           Repository formen.
+                var repository = collector.CreateRepository();
+
+                // 3. Abfragen auf dem Repository formulieren und ausführen
                 var qbld = repository.GetNewQueryBuilder();
 
                 qbld.MinDiameterInKm = 10.0;

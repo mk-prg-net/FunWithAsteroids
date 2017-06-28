@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AsteroidsBL;
 
-namespace AsteroidsDAL.CSV
+namespace AsteroidsBL
 {
     public class QueryBuilder : AsteroidsBL.IQueryBuilder
     {
