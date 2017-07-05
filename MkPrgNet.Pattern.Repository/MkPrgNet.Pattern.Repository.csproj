@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1CAA5695-5061-4370-90DE-183B53C4F965}</ProjectGuid>
+    <ProjectGuid>{68EF5C8F-158C-4B4F-B5F9-13F8D8D464AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AsteroidsBL</RootNamespace>
-    <AssemblyName>AsteroidsBL</AssemblyName>
+    <RootNamespace>MkPrgNet.Pattern.Repository</RootNamespace>
+    <AssemblyName>MkPrgNet.Pattern.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,30 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asteroid.cs" />
-    <Compile Include="AsteroidsCollector.cs" />
-    <Compile Include="AsteroidsRepository.cs" />
-    <Compile Include="IAsteroid.cs" />
-    <Compile Include="IAsteroidsCollector.cs" />
-    <Compile Include="IAsteroidsReader.cs" />
-    <Compile Include="IAsteroidsRepository.cs" />
+    <Compile Include="IFilteredSortedSet.cs" />
     <Compile Include="IQueryBuilder.cs" />
     <Compile Include="ISortOrderBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="QueryBuilder.cs" />
-    <Compile Include="SortOrderBuilder.cs" />
-    <Compile Include="SortOrderBuilder2.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsteroidsDAL.CSV.Test", "As
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asteroids.UI.WinForm", "Asteroids.UI.WinForm\Asteroids.UI.WinForm.csproj", "{3B0E9FD5-FFD7-4806-A4F2-4A271E0C4E56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MkPrgNet.Pattern.Repository", "MkPrgNet.Pattern.Repository\MkPrgNet.Pattern.Repository.csproj", "{68EF5C8F-158C-4B4F-B5F9-13F8D8D464AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3B0E9FD5-FFD7-4806-A4F2-4A271E0C4E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B0E9FD5-FFD7-4806-A4F2-4A271E0C4E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B0E9FD5-FFD7-4806-A4F2-4A271E0C4E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68EF5C8F-158C-4B4F-B5F9-13F8D8D464AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68EF5C8F-158C-4B4F-B5F9-13F8D8D464AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68EF5C8F-158C-4B4F-B5F9-13F8D8D464AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68EF5C8F-158C-4B4F-B5F9-13F8D8D464AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

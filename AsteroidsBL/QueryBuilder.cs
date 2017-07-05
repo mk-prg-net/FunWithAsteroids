@@ -32,13 +32,6 @@ namespace AsteroidsBL
             }
         }
 
-        public bool OrderByDiameterAsc
-        {
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         public int Skip
         {
@@ -55,7 +48,23 @@ namespace AsteroidsBL
             {
                 query = query.Take(value);
             }
-        }        
+        }
+
+        public double MinDistanceSunInAU
+        {
+            set
+            {
+                query = query.Where(r => r.DistanceSunInAU >= value);
+            }
+        }
+
+        public double MaxDistanceSunInAU
+        {
+            set
+            {
+                query = query.Where(r => r.DistanceSunInAU <= value);
+            }
+        }
 
         /// <summary>
         /// Starte die parallelisierte Filterung. Sortiert anschliessend sequentiell.
@@ -67,6 +76,19 @@ namespace AsteroidsBL
             var filtered = query.ToArray();
             return filtered.OrderBy(r => r.DistanceSunInAU);
         }
+
+        public IEnumerable<IAsteroid> GetFilteredSortedSet(params Action<ISortOrderBuilder>[] defSortOrders)
+        {
+            var SortOrderBuilder = new SortOrderBuilder(query.ToArray());
+
+            foreach(var defSortOrder in defSortOrders)
+            {
+                defSortOrder(SortOrderBuilder);
+            }
+
+            return SortOrderBuilder.GetFilteredSortedSet();
+        }
+
 
         /// <summary>
         /// Starte die parallelisierte Filterung asynchron. Sortiert anschliessend sequentiell.
@@ -87,6 +109,11 @@ namespace AsteroidsBL
         {
             await Task.Run(() => query.ForAll(a =>
                 queue.Enqueue(a)));
+        }
+
+        public ISortOrderBuilder GetSortOrderBuilder()
+        {
+            return new SortOrderBuilder2(query);
         }
     }
 }

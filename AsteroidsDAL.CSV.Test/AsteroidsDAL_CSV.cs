@@ -79,6 +79,17 @@ namespace AsteroidsDAL.CSV.Test
                 var res = qbld.GetFilteredSortedSet();
                 Assert.IsTrue(res.All(r => r.DiameterInKm >= 10.0 && r.DiameterInKm <= 50.0));
 
+                var SortBld = qbld.GetSortOrderBuilder();
+
+                SortBld.OrderByDiameterAsc = true;
+
+                var resSorted = SortBld.GetFilteredSortedSet();
+
+                Assert.IsTrue(resSorted.First().DiameterInKm > resSorted.Last().DiameterInKm);
+
+
+                var resSorted2 = qbld.GetFilteredSortedSet(sb => sb.OrderByDiameterAsc = true);
+
                 var resAsync = await qbld.GetFilteredSortedSetAsync();
                 Assert.IsTrue(resAsync.All(r => r.DiameterInKm >= 10.0 && r.DiameterInKm <= 50.0));
 

@@ -54,6 +54,16 @@ namespace AsteroidsBL
         double MaxDiameterInKm { set; }
 
         /// <summary>
+        /// Schränkt auf Asteroiden mit einem Mindestabstand von der Sonne ein
+        /// </summary>
+        double MinDistanceSunInAU { set; }
+
+        /// <summary>
+        /// Schränkt auf Asteroiden mit einem maximalabstand von der Sonne ein
+        /// </summary>
+        double MaxDistanceSunInAU { set; }
+
+        /// <summary>
         /// Überspringt in der gefilterten Menge die ersten N elemente
         /// </summary>
         int Skip { set; }
@@ -63,7 +73,6 @@ namespace AsteroidsBL
         /// </summary>
         int Take { set; }
 
-        bool OrderByDiameterAsc { set; }
 
         /// <summary>
         /// Liefert eine Menge von Asteroiden, die bezüglich  der zuvor
@@ -84,6 +93,14 @@ namespace AsteroidsBL
         /// <param name="queue"></param>
         Task EnqueueFilteredInAsync(System.Collections.Concurrent.ConcurrentQueue<IAsteroid> queue);
 
+
+        /// <summary>
+        /// Wird aufgerufen, nachdem alle Filter definiert wurden.
+        /// Liefert ein Objekt, mit dem die Sortierreihenpfolgen definiert
+        /// werden.
+        /// </summary>
+        /// <returns></returns>
+        ISortOrderBuilder GetSortOrderBuilder();
 
     }
 }
