@@ -66,11 +66,11 @@ namespace AsteroidsDAL.CSV
 
             // name
             //string name = cols[0].Substring(cols[0].LastIndexOf(' ')).Trim();
-            var nameParts = cols[0].Replace('"', ' ').Trim().Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-            string name = nameParts.Length > 1 ?  String.Join(" ", nameParts.Skip(1).ToArray()) : nameParts[0];
+            var nameParts = cols[0].Replace('"', ' ').Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string name = nameParts.Length > 1 ? String.Join(" ", nameParts.Skip(1).ToArray()) : nameParts[0];
 
-            
-            
+
+
 
             // diameter
             double diameter = 0.0;
@@ -93,6 +93,12 @@ namespace AsteroidsDAL.CSV
             albedo = ReadDoubleColumn(cols, 5, "albedo");
 
             return new Asteroid(name, a, e, orbitTime, albedo, diameter);
+        }
+
+        private static int NewMethod(int i)
+        {
+            i++;
+            return i;
         }
 
         private double ReadDoubleColumn(string[] cols, int colIndex, string colName)

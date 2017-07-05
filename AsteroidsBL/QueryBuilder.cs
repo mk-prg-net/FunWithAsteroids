@@ -66,29 +66,6 @@ namespace AsteroidsBL
             }
         }
 
-        /// <summary>
-        /// Starte die parallelisierte Filterung. Sortiert anschliessend sequentiell.
-        /// Kehrt erst zurück, wenn alle Aufgaben erledigt sind
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<IAsteroid> GetFilteredSortedSet()
-        {
-            var filtered = query.ToArray();
-            return filtered.OrderBy(r => r.DistanceSunInAU);
-        }
-
-        public IEnumerable<IAsteroid> GetFilteredSortedSet(params Action<ISortOrderBuilder>[] defSortOrders)
-        {
-            var SortOrderBuilder = new SortOrderBuilder(query.ToArray());
-
-            foreach(var defSortOrder in defSortOrders)
-            {
-                defSortOrder(SortOrderBuilder);
-            }
-
-            return SortOrderBuilder.GetFilteredSortedSet();
-        }
-
 
         /// <summary>
         /// Starte die parallelisierte Filterung asynchron. Sortiert anschliessend sequentiell.
@@ -113,7 +90,7 @@ namespace AsteroidsBL
 
         public ISortOrderBuilder GetSortOrderBuilder()
         {
-            return new SortOrderBuilder2(query);
+            return new SortOrderBuilder(query);
         }
     }
 }

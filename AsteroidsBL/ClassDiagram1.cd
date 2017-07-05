@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AsteroidsBL.Asteroid" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABgCAABAAABEAAAAIAQAABAAAAEAAAAAQgAAAAA=</HashCode>
+      <FileName>Asteroid.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AsteroidsBL.AsteroidsCollector" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAoAAAIAAAAAAAAAgAAAAAQAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>AsteroidsCollector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AsteroidsBL.AsteroidsRepository" BaseTypeListCollapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAgAEAAEAAAAAAAAAAAgAAIAAAAEAAAA=</HashCode>
+      <FileName>AsteroidsRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AsteroidsBL.FilteredSortedSet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBAAAAAAAAAAAABAAAAAAAQAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>FilteredSortedSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AsteroidsBL.QueryBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAIAAEAAAAAAQAAAAAAAgAAAAAAgAAEIAAAAEIA=</HashCode>
+      <FileName>QueryBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AsteroidsBL.SortOrderBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAABAgAAAAAAAEAABAAEAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>SortOrderBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AsteroidsBL.Properties.Resources" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAEAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="AsteroidsBL.IAsteroid">
+    <Position X="6.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAABAAAAAAAQAAAAAAAEAAAAAQgAAAAA=</HashCode>
+      <FileName>IAsteroid.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AsteroidsBL.IAsteroidsCollector">
+    <Position X="9.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAIAAAAAAAAAgAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IAsteroidsCollector.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AsteroidsBL.IAsteroidsReader">
+    <Position X="4.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IAsteroidsReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AsteroidsBL.IAsteroidsRepository">
+    <Position X="9.25" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAgAAAAEAAAAAAAAAAAgAAIAAAAEAAAA=</HashCode>
+      <FileName>IAsteroidsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AsteroidsBL.IQueryBuilder">
+    <Position X="9.25" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAIAAEAAAAAAQAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>IQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AsteroidsBL.ISortOrderBuilder">
+    <Position X="7" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISortOrderBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

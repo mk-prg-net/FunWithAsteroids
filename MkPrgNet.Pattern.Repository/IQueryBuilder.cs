@@ -47,7 +47,8 @@ namespace MkPrgNet.Pattern.Repository
     /// Filtereinschränkungen festgelegt werden
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IQueryBuilder<T>
+    public interface IQueryBuilder<T, TSortOrderBuilder>
+        where TSortOrderBuilder : ISortOrderBuilder<T>
     {
         /// <summary>
         /// Wenn alle Filter in dem QueryBuilder definiert wurden,
@@ -55,6 +56,6 @@ namespace MkPrgNet.Pattern.Repository
         /// zu erhalten, mit dem man die Sortierreihenfolgen definieren kann.
         /// </summary>
         /// <returns></returns>
-        ISortOrderBuilder<T> GetSortOrderBuilder();
+        TSortOrderBuilder GetSortOrderBuilder();
     }
 }

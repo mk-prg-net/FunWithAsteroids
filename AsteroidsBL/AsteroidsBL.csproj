@@ -43,6 +43,7 @@
     <Compile Include="Asteroid.cs" />
     <Compile Include="AsteroidsCollector.cs" />
     <Compile Include="AsteroidsRepository.cs" />
+    <Compile Include="FilteredSortedSet.cs" />
     <Compile Include="IAsteroid.cs" />
     <Compile Include="IAsteroidsCollector.cs" />
     <Compile Include="IAsteroidsReader.cs" />
@@ -57,13 +58,21 @@
     </Compile>
     <Compile Include="QueryBuilder.cs" />
     <Compile Include="SortOrderBuilder.cs" />
-    <Compile Include="SortOrderBuilder2.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MkPrgNet.Pattern.Repository\MkPrgNet.Pattern.Repository.csproj">
+      <Project>{68ef5c8f-158c-4b4f-b5f9-13f8d8d464ae}</Project>
+      <Name>MkPrgNet.Pattern.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

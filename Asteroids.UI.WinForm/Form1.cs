@@ -63,6 +63,11 @@ namespace Asteroids.UI.WinForm
             //var lbxLbl = new mko.Log.WinFormStatusStripLogHnd(statusStrip1);
 
             log.Log(mko.Log.RC.CreateStatus("Initialisierung beendet"));
+
+            EnableTbx(false);
+            EnableGrpSort(false);
+            btnGetSortOrderBuilder.Enabled = false;
+            btnGetResult.Enabled = false;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -72,6 +77,8 @@ namespace Asteroids.UI.WinForm
 
         private async void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            tabControlMain.SelectedTab = tabPageImport;
+
             if(openAsteroidsCsv.ShowDialog() == DialogResult.OK)
             {
                 // Erfassung vorbereiten
@@ -88,6 +95,9 @@ namespace Asteroids.UI.WinForm
                 {
                     var reader = new AsteroidsDAL.CSV.AsteroidsCSVReader(openAsteroidsCsv.FileName, 2);
 
+                    // geht nicht aus einem anderen Thread
+                    //lblImportCsvCountAsteroids.Text = "HAllo";
+
                     while (!reader.EOF)
                     {
                         collector.Add(reader.Read());
@@ -97,6 +107,8 @@ namespace Asteroids.UI.WinForm
                 UpdateCollectorCounterTimer.Stop();
 
                 UpdateCollectorCounterTimer_Tick(null, null);
+
+                repo = collector.CreateRepository();
 
                 log.Log(mko.Log.RC.CreateStatus("Einlesen erfolgreich beendet"));
                                 
@@ -116,6 +128,182 @@ namespace Asteroids.UI.WinForm
         {
             var about = new About();
             about.ShowDialog();
+        }
+
+        AsteroidsBL.IQueryBuilder queryBld;
+
+        private void btnNewQuery_Click(object sender, EventArgs e)
+        {
+            queryBld = repo.GetNewQueryBuilder();
+
+            cbxMaxDiameter.Checked = false;
+            cbxMaxDistanceSun.Checked = false;
+            cbxMinDiameter.Checked = false;
+            cbxMinDistanceSun.Checked = false;
+            cbxSortDiameter.Checked = false;
+            cbxSortDistanceSun.Checked = false;
+
+            EnableTbx(true);
+            EnableGrpSort(false);
+
+            btnGetSortOrderBuilder.Enabled = true;
+            btnGetResult.Enabled = false;
+        }
+
+        private void EnableGrpSort(bool enable)
+        {
+            grpSortDiameter.Enabled = enable;            
+            grpSortDistanceSun.Enabled = enable;
+
+            if (enable)
+            {
+                rbtDiameterDown.Checked = false;
+                rbtDiameterUp.Checked = false;
+                rbtDistanceSunDown.Checked = false;
+                rbtDistanceSunUp.Checked = false;
+            }
+        }
+
+        private void tbxMinDiameter_Leave(object sender, EventArgs e)
+        {
+            double diameter;
+            if(double.TryParse(tbxMinDiameter.Text, out diameter))
+            {
+                queryBld.MinDiameterInKm = diameter;
+
+                cbxMinDiameter.Checked = true;
+                tbxMinDiameter.Enabled = false;
+            } else
+            {
+                tbxMinDiameter.Text = "";
+            }
+        }
+
+        private void tbxMaxDiameter_Leave(object sender, EventArgs e)
+        {
+            double diameter;
+            if (double.TryParse(tbxMaxDiameter.Text, out diameter))
+            {
+                queryBld.MaxDiameterInKm = diameter;
+
+                cbxMaxDiameter.Checked = true;
+                tbxMaxDiameter.Enabled = false;
+            }
+            else
+            {
+                tbxMaxDiameter.Text = "";
+            }
+        }
+
+        AsteroidsBL.ISortOrderBuilder sortOrderBld;
+
+        private void btnGetSortOrderBuilder_Click(object sender, EventArgs e)
+        {
+            EnableTbx(false);
+            EnableGrpSort(true);
+            
+            sortOrderBld = queryBld.GetSortOrderBuilder();
+
+            btnGetSortOrderBuilder.Enabled = false;
+            btnGetResult.Enabled = true;
+
+        }
+
+        private void EnableTbx(bool enable)
+        {
+            tbxMaxDiameter.Enabled = enable;
+            tbxMaxDistanceSun.Enabled = enable;
+            tbxMinDiameter.Enabled = enable;
+            tbxMinDistanceSun.Enabled = enable;
+
+            if (enable)
+            {
+                tbxMaxDiameter.Text = "";
+                tbxMaxDistanceSun.Text = "";
+                tbxMinDiameter.Text = "";
+                tbxMinDistanceSun.Text = "";
+            }
+        }
+
+        private void rbtDiameterUp_CheckedChanged(object sender, EventArgs e)
+        {
+            sortOrderBld.OrderByDiameterAsc = false;
+            lockSortDiameter();
+        }
+
+        private void rbtDiameterDown_CheckedChanged(object sender, EventArgs e)
+        {
+            sortOrderBld.OrderByDiameterAsc = true;
+            lockSortDiameter();
+        }
+
+        private void lockSortDiameter()
+        {
+            cbxSortDiameter.Checked = true;
+            grpSortDiameter.Enabled = false;
+        }
+
+        private void rbtDistanceSunUp_CheckedChanged(object sender, EventArgs e)
+        {
+            sortOrderBld.OrderByDistanceSunInAU = false;
+            lockSortDistanceSun();
+        }
+
+        private void lockSortDistanceSun()
+        {
+            cbxSortDistanceSun.Checked = true;
+            grpSortDistanceSun.Enabled = false;
+        }
+
+        private void rbtDistanceSunDown_CheckedChanged(object sender, EventArgs e)
+        {
+            sortOrderBld.OrderByDistanceSunInAU = true;
+            lockSortDistanceSun();
+        }
+
+        private void btnGetResult_Click(object sender, EventArgs e)
+        {
+            var fsSet = sortOrderBld.GetFilteredSortedSet();
+
+            statusLabelMain.Text = "# " + fsSet.Count();
+
+            QueryResultBindingSource.DataSource = fsSet.Get();
+            QueryResultBindingSource.ResetBindings(false);
+
+            tabControlMain.SelectedTab = tabPageResult;
+        }
+
+        private void tbxMinDistanceSun_Leave(object sender, EventArgs e)
+        {
+            double d;
+            if (double.TryParse(tbxMinDistanceSun.Text, out d))
+            {
+                queryBld.MinDistanceSunInAU = d;
+
+                cbxMinDistanceSun.Checked = true;
+                tbxMinDistanceSun.Enabled = false;
+            }
+            else
+            {
+                tbxMinDistanceSun.Text = "";
+            }
+
+        }
+
+        private void tbxMaxDistanceSun_Leave(object sender, EventArgs e)
+        {
+            double d;
+            if (double.TryParse(tbxMaxDistanceSun.Text, out d))
+            {
+                queryBld.MaxDistanceSunInAU = d;
+                cbxMaxDistanceSun.Checked = true;                
+                tbxMaxDistanceSun.Enabled = false;
+            }
+            else
+            {
+                tbxMaxDistanceSun.Text = "";
+            }
+
         }
     }
 }

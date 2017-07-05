@@ -64,7 +64,7 @@ namespace MkPrgNet.Pattern.Repository
         /// Liefert alle Elemente der Menge
         /// </summary>
         /// <returns></returns>
-        IEnumerable<T> Get(long skip, long take);
+        IEnumerable<T> Get(int skip = 0, int take = -1);
 
     }
 }

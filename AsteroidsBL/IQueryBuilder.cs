@@ -41,7 +41,7 @@ using System.Threading.Tasks;
 
 namespace AsteroidsBL
 {
-    public interface IQueryBuilder
+    public interface IQueryBuilder : MkPrgNet.Pattern.Repository.IQueryBuilder<IAsteroid, ISortOrderBuilder>
     {
         /// <summary>
         /// Schränkt auf Asteroiden mit einem Mindestdurchmesser ein
@@ -63,44 +63,11 @@ namespace AsteroidsBL
         /// </summary>
         double MaxDistanceSunInAU { set; }
 
-        /// <summary>
-        /// Überspringt in der gefilterten Menge die ersten N elemente
-        /// </summary>
-        int Skip { set; }
-
-        /// <summary>
-        /// Nimmt aus der gefilterten Menge nur die nächsten M Elemente
-        /// </summary>
-        int Take { set; }
-
-
-        /// <summary>
-        /// Liefert eine Menge von Asteroiden, die bezüglich  der zuvor
-        /// eingestellten Filterkriterien gefiltert ist.
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<IAsteroid> GetFilteredSortedSet();
-
-        /// <summary>
-        /// Startet die Abfrage in einem eigenen Task
-        /// </summary>
-        /// <returns></returns>
-        Task<IEnumerable<IAsteroid>> GetFilteredSortedSetAsync();
 
         /// <summary>
         /// Filtert parallel und stellt unmittelbar alle gefilterten in einer Queue bereit
         /// </summary>
         /// <param name="queue"></param>
         Task EnqueueFilteredInAsync(System.Collections.Concurrent.ConcurrentQueue<IAsteroid> queue);
-
-
-        /// <summary>
-        /// Wird aufgerufen, nachdem alle Filter definiert wurden.
-        /// Liefert ein Objekt, mit dem die Sortierreihenpfolgen definiert
-        /// werden.
-        /// </summary>
-        /// <returns></returns>
-        ISortOrderBuilder GetSortOrderBuilder();
-
     }
 }

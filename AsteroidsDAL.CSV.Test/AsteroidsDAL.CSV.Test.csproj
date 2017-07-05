@@ -62,6 +62,10 @@
       <Project>{d6f55c0b-3516-4098-b2d5-7a7e6db35ae4}</Project>
       <Name>AsteroidsDAL.CSV</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MkPrgNet.Pattern.Repository\MkPrgNet.Pattern.Repository.csproj">
+      <Project>{68ef5c8f-158c-4b4f-b5f9-13f8d8d464ae}</Project>
+      <Name>MkPrgNet.Pattern.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asteroids.csv">

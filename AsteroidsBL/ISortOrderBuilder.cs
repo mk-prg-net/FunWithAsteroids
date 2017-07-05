@@ -41,7 +41,7 @@ using System.Threading.Tasks;
 
 namespace AsteroidsBL
 {
-    public interface ISortOrderBuilder
+    public interface ISortOrderBuilder : MkPrgNet.Pattern.Repository.ISortOrderBuilder<IAsteroid>
     {
         /// <summary>
         /// Sortiert absteigend bezüglich des Durchmessers, wenn 
@@ -60,15 +60,6 @@ namespace AsteroidsBL
         /// bezüglich des Sonnenabstandes nicht statt.
         /// </summary>
         bool OrderByDistanceSunInAU { set; }
-
-
-        /// <summary>
-        /// Liefert eine Menge von Asteroiden, die bezüglich  der zuvor
-        /// eingestellten Filter- und Sortierkriterien gefiltert ist.
-        /// </summary>
-        /// <returns></returns>
-
-        IEnumerable<IAsteroid> GetFilteredSortedSet();
 
     }
 }

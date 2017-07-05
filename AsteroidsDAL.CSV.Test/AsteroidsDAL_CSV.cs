@@ -54,7 +54,7 @@ namespace AsteroidsDAL.CSV.Test
         {
             // 1. Stufe: Einlesen der Asteroiden aus der CSV- Datei 
             //    und erfassen im Sammler  
-            var collector = new AsteroidsCollector();
+            AsteroidsBL.IAsteroidsCollector collector = new AsteroidsCollector();
             try
             {
                 var reader = new AsteroidsCSVReader("Asteroids.csv", 2);
@@ -76,22 +76,19 @@ namespace AsteroidsDAL.CSV.Test
                 qbld.MinDiameterInKm = 10.0;
                 qbld.MaxDiameterInKm = 50.0;
 
-                var res = qbld.GetFilteredSortedSet();
-                Assert.IsTrue(res.All(r => r.DiameterInKm >= 10.0 && r.DiameterInKm <= 50.0));
-
+                // 4. Definition der Sortierreihenfolgen
                 var SortBld = qbld.GetSortOrderBuilder();
 
                 SortBld.OrderByDiameterAsc = true;
 
-                var resSorted = SortBld.GetFilteredSortedSet();
+                // Gefilterte und Sortierte Menge ale IFilteredSortedSet Objekte abrufen
+                var fsSet = SortBld.GetFilteredSortedSet();
+                Assert.IsTrue(fsSet.Any());
 
-                Assert.IsTrue(resSorted.First().DiameterInKm > resSorted.Last().DiameterInKm);
+                // Zugrif auf die einzelnen Elemente
+                var elems = fsSet.Get();
+                Assert.IsTrue(elems.First().DiameterInKm > elems.Last().DiameterInKm);
 
-
-                var resSorted2 = qbld.GetFilteredSortedSet(sb => sb.OrderByDiameterAsc = true);
-
-                var resAsync = await qbld.GetFilteredSortedSetAsync();
-                Assert.IsTrue(resAsync.All(r => r.DiameterInKm >= 10.0 && r.DiameterInKm <= 50.0));
 
                 await qbld.EnqueueFilteredInAsync(queue);
 

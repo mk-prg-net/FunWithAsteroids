@@ -34,7 +34,10 @@ namespace AsteroidsBL
             _OrbitalTime = OrbitalTime;
         }
 
-
+        /// <summary>
+        /// Copy- Konstuktor
+        /// </summary>
+        /// <param name="src"></param>
         public Asteroid(IAsteroid src)
             : this(
                   Name: src.Name,

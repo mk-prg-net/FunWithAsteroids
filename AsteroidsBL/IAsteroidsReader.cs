@@ -9,7 +9,7 @@ namespace AsteroidsBL
     public interface IAsteroidsReader
     {
         /// <summary>
-        /// Liset den nächsten Asteroiden ein
+        /// Liest den nächsten Asteroiden ein
         /// </summary>
         /// <returns></returns>
         IAsteroid Read();

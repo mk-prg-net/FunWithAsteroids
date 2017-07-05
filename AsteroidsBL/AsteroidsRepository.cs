@@ -39,17 +39,20 @@ namespace AsteroidsBL
             //}
 
             // Modern mittels LINQ
-            _Asteroids.AddRange(
-                    Asteroiden.Select(asteroid =>
-                        new Asteroid(
-                                Name: asteroid.Name,
-                                DiameterInKm: asteroid.DiameterInKm,
-                                Albedo: asteroid.Albedo,
-                                DistanceSunInAU: asteroid.DistanceSunInAU,
-                                E: asteroid.E,
-                                OrbitalTime: asteroid.OrbitalTimeInEarthYears)
-                        )
-                );
+            //_Asteroids.AddRange(
+            //        Asteroiden.Select(asteroid =>
+            //            new Asteroid(
+            //                    Name: asteroid.Name,
+            //                    DiameterInKm: asteroid.DiameterInKm,
+            //                    Albedo: asteroid.Albedo,
+            //                    DistanceSunInAU: asteroid.DistanceSunInAU,
+            //                    E: asteroid.E,
+            //                    OrbitalTime: asteroid.OrbitalTimeInEarthYears)
+            //            )
+            //    );
+
+            _Asteroids.AddRange(Asteroiden.Select(asteroid => new Asteroid(asteroid)));
+
         }
 
 
