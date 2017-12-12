@@ -44,13 +44,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabPageImport = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.diameterInKmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.distanceSunInAUDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.albedoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CollectedAsteroidsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panImportCsvMain = new System.Windows.Forms.Panel();
             this.lblImportCsvCountAsteroids = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -84,6 +77,14 @@
             this.btnNewQuery = new System.Windows.Forms.Button();
             this.tabPageResult = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.UpdateCollectorCounterTimer = new System.Windows.Forms.Timer(this.components);
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.diameterInKmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.distanceSunInAUDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.albedoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CollectedAsteroidsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diameterInKmDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,14 +92,12 @@
             this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.albedoDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QueryResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.UpdateCollectorCounterTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageLog.SuspendLayout();
             this.tabPageImport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).BeginInit();
             this.panImportCsvMain.SuspendLayout();
             this.tabPageQuery.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -107,6 +106,7 @@
             this.panel1.SuspendLayout();
             this.tabPageResult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QueryResultBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -248,52 +248,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(767, 344);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // diameterInKmDataGridViewTextBoxColumn
-            // 
-            this.diameterInKmDataGridViewTextBoxColumn.DataPropertyName = "DiameterInKm";
-            this.diameterInKmDataGridViewTextBoxColumn.HeaderText = "DiameterInKm";
-            this.diameterInKmDataGridViewTextBoxColumn.Name = "diameterInKmDataGridViewTextBoxColumn";
-            this.diameterInKmDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // eDataGridViewTextBoxColumn
-            // 
-            this.eDataGridViewTextBoxColumn.DataPropertyName = "E";
-            this.eDataGridViewTextBoxColumn.HeaderText = "E";
-            this.eDataGridViewTextBoxColumn.Name = "eDataGridViewTextBoxColumn";
-            this.eDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // distanceSunInAUDataGridViewTextBoxColumn
-            // 
-            this.distanceSunInAUDataGridViewTextBoxColumn.DataPropertyName = "DistanceSunInAU";
-            this.distanceSunInAUDataGridViewTextBoxColumn.HeaderText = "DistanceSunInAU";
-            this.distanceSunInAUDataGridViewTextBoxColumn.Name = "distanceSunInAUDataGridViewTextBoxColumn";
-            this.distanceSunInAUDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // orbitalTimeInEarthYearsDataGridViewTextBoxColumn
-            // 
-            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.DataPropertyName = "OrbitalTimeInEarthYears";
-            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.HeaderText = "OrbitalTimeInEarthYears";
-            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.Name = "orbitalTimeInEarthYearsDataGridViewTextBoxColumn";
-            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // albedoDataGridViewTextBoxColumn
-            // 
-            this.albedoDataGridViewTextBoxColumn.DataPropertyName = "Albedo";
-            this.albedoDataGridViewTextBoxColumn.HeaderText = "Albedo";
-            this.albedoDataGridViewTextBoxColumn.Name = "albedoDataGridViewTextBoxColumn";
-            this.albedoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // CollectedAsteroidsBindingSource
-            // 
-            this.CollectedAsteroidsBindingSource.DataSource = typeof(AsteroidsBL.IAsteroid);
             // 
             // panImportCsvMain
             // 
@@ -662,6 +616,57 @@
             this.dataGridView2.Size = new System.Drawing.Size(767, 405);
             this.dataGridView2.TabIndex = 0;
             // 
+            // UpdateCollectorCounterTimer
+            // 
+            this.UpdateCollectorCounterTimer.Interval = 300;
+            this.UpdateCollectorCounterTimer.Tick += new System.EventHandler(this.UpdateCollectorCounterTimer_Tick);
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // diameterInKmDataGridViewTextBoxColumn
+            // 
+            this.diameterInKmDataGridViewTextBoxColumn.DataPropertyName = "DiameterInKm";
+            this.diameterInKmDataGridViewTextBoxColumn.HeaderText = "DiameterInKm";
+            this.diameterInKmDataGridViewTextBoxColumn.Name = "diameterInKmDataGridViewTextBoxColumn";
+            this.diameterInKmDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // eDataGridViewTextBoxColumn
+            // 
+            this.eDataGridViewTextBoxColumn.DataPropertyName = "E";
+            this.eDataGridViewTextBoxColumn.HeaderText = "E";
+            this.eDataGridViewTextBoxColumn.Name = "eDataGridViewTextBoxColumn";
+            this.eDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // distanceSunInAUDataGridViewTextBoxColumn
+            // 
+            this.distanceSunInAUDataGridViewTextBoxColumn.DataPropertyName = "DistanceSunInAU";
+            this.distanceSunInAUDataGridViewTextBoxColumn.HeaderText = "DistanceSunInAU";
+            this.distanceSunInAUDataGridViewTextBoxColumn.Name = "distanceSunInAUDataGridViewTextBoxColumn";
+            this.distanceSunInAUDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // orbitalTimeInEarthYearsDataGridViewTextBoxColumn
+            // 
+            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.DataPropertyName = "OrbitalTimeInEarthYears";
+            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.HeaderText = "OrbitalTimeInEarthYears";
+            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.Name = "orbitalTimeInEarthYearsDataGridViewTextBoxColumn";
+            this.orbitalTimeInEarthYearsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // albedoDataGridViewTextBoxColumn
+            // 
+            this.albedoDataGridViewTextBoxColumn.DataPropertyName = "Albedo";
+            this.albedoDataGridViewTextBoxColumn.HeaderText = "Albedo";
+            this.albedoDataGridViewTextBoxColumn.Name = "albedoDataGridViewTextBoxColumn";
+            this.albedoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // CollectedAsteroidsBindingSource
+            // 
+            this.CollectedAsteroidsBindingSource.DataSource = typeof(AsteroidsBL.IAsteroid);
+            // 
             // nameDataGridViewTextBoxColumn1
             // 
             this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
@@ -708,11 +713,6 @@
             // 
             this.QueryResultBindingSource.DataSource = typeof(AsteroidsBL.IAsteroid);
             // 
-            // UpdateCollectorCounterTimer
-            // 
-            this.UpdateCollectorCounterTimer.Interval = 300;
-            this.UpdateCollectorCounterTimer.Tick += new System.EventHandler(this.UpdateCollectorCounterTimer_Tick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -724,6 +724,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Fun with Asteroids";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -732,7 +733,6 @@
             this.tabPageLog.ResumeLayout(false);
             this.tabPageImport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).EndInit();
             this.panImportCsvMain.ResumeLayout(false);
             this.panImportCsvMain.PerformLayout();
             this.tabPageQuery.ResumeLayout(false);
@@ -745,6 +745,7 @@
             this.panel1.ResumeLayout(false);
             this.tabPageResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollectedAsteroidsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QueryResultBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
