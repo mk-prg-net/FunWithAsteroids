@@ -24,7 +24,7 @@ namespace AsteroidsDAL.CSV.Test
             queue = new ConcurrentQueue<AsteroidsBL.IAsteroid>();
 
             // Startet Task, der regelmäßig die gefilterten 
-            // Asteroiden aus einer mulithrad- resistenten Queue
+            // Asteroiden aus einer mulithread- resistenten Queue
             // abruft.
             Task.Run(() =>
             {
@@ -81,7 +81,7 @@ namespace AsteroidsDAL.CSV.Test
 
                 SortBld.OrderByDiameterAsc = true;
 
-                // Gefilterte und Sortierte Menge ale IFilteredSortedSet Objekte abrufen
+                // Gefilterte und Sortierte Menge als IFilteredSortedSet Objekte abrufen
                 var fsSet = SortBld.GetFilteredSortedSet();
                 Assert.IsTrue(fsSet.Any());
 

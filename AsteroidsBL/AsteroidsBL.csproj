@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asteroid.cs" />
-    <Compile Include="AsteroidsCollector.cs" />
-    <Compile Include="AsteroidsRepository.cs" />
-    <Compile Include="FilteredSortedSet.cs" />
+    <Compile Include="Impl\Asteroid.cs" />
+    <Compile Include="Impl\AsteroidsCollector.cs" />
+    <Compile Include="Impl\AsteroidsRepository.cs" />
+    <Compile Include="Impl\FilteredSortedSet.cs" />
     <Compile Include="IAsteroid.cs" />
     <Compile Include="IAsteroidsCollector.cs" />
     <Compile Include="IAsteroidsReader.cs" />
@@ -56,8 +56,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="QueryBuilder.cs" />
-    <Compile Include="SortOrderBuilder.cs" />
+    <Compile Include="Impl\QueryBuilder.cs" />
+    <Compile Include="Impl\SortOrderBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

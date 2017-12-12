@@ -7,7 +7,7 @@
 //  Projekt.......: Asteroids.UI.WinForm
 //  Name..........: 
 //  Aufgabe/Fkt...: Graphische Benutzeroberfläche mit asynchronen Funktionen
-//                  zum lasen und analysieren der Asteroidendaten
+//                  zum lesen und analysieren der Asteroidendaten
 //
 //
 //
@@ -46,14 +46,14 @@ using System.Windows.Forms;
 using System.IO;
 namespace Asteroids.UI.WinForm
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         mko.Log.LogServer log = new mko.Log.LogServer();
 
         AsteroidsBL.IAsteroidsCollector collector;
         AsteroidsBL.IAsteroidsRepository repo;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
