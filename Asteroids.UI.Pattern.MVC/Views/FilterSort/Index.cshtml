@@ -1,0 +1,118 @@
+﻿@model Asteroids.UI.Pattern.MVC.Models.FilterSort.Index
+
+@{
+}
+
+<h1>Übersicht, alle Asteroiden</h1>
+
+<form action="/FilterSort/Index" method="post">
+    <div class="form-group row">
+
+        <div class="col-xs-1">
+            <label for="minDia">&oslash; min.</label>
+            <input type="text" class="form-control" name="minDia" id="minDia" value="@Model.minDia" />
+        </div>
+        <div class="col-xs-1">
+            <label for="maxDia">&oslash; max.</label>
+            <input type="text" class="form-control" name="maxDia" id="maxDia" value="@Model.maxDia" />
+        </div>
+        <div class="col-xs-2">
+            <label for="minDst">Sun &harr; min.</label>
+            <input type="text" class="form-control" name="minDst" id="minDst" value="@Model.minDst" />
+        </div>
+        <div class="col-xs-2">
+            <label for="maxDst">Sun &harr; max.</label>
+            <input type="text" class="form-control" name="maxDst" id="maxDst" value="@Model.maxDst" />
+        </div>
+        <div class="col-xs-2">
+            <label>sort &oslash;</label>
+            <div class="radio">
+                <label class="radio-inline"><input type="radio" class="form-control" name="sortDia" id="sortDiaUp" value="true" checked="checked" />&nbsp;&uarr; </label>
+                <label class="radio-inline"><input type="radio" class="form-control" name="sortDia" id="sortDiaDown" value="false" />&nbsp;&darr; </label>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <label>sort Sun &harr;</label>
+            <div class="radio">
+                <label class="radio-inline"><input type="radio" class="form-control" name="sortDst" id="sortDstUp" value="true" checked="checked" /> &nbsp;&uarr; </label>
+                <label class="radio-inline"><input type="radio" class="form-control" name="sortDst" id="sortDstDown" value="false" /> &nbsp;&darr;</label>
+            </div>
+        </div>
+
+        <div class="col-xs-1">
+            <label></label>
+            <input type="submit" value="Filtern" class="form-control btn-danger" />
+        </div>
+
+
+    </div>
+</form>
+
+@{
+    var pred = Model.SKIP - 20 >= 0 ? Model.SKIP - 20 : 0;
+    var next = Model.SKIP + 20 < Model.fss.Count() ? Model.SKIP + 20 : Model.SKIP;
+
+    string qStrFlt = "";
+    if (!string.IsNullOrWhiteSpace(Model.minDia))
+    {
+        qStrFlt += $"&minDia={Model.minDia}";
+    }
+    if (!string.IsNullOrWhiteSpace(Model.maxDia))
+    {
+        qStrFlt += $"&maxDia={Model.maxDia}";
+    }
+    if (!string.IsNullOrWhiteSpace(Model.minDst))
+    {
+        qStrFlt += $"&minDst={Model.minDst}";
+    }
+    if (!string.IsNullOrWhiteSpace(Model.maxDst))
+    {
+        qStrFlt += $"&minDia={Model.maxDst}";
+    }
+
+}
+
+<div class="btn-group">
+    <a href="/FilterSort?skip=@pred@qStrFlt" class="btn btn-success"><span class="glyphicon glyphicon-arrow-up"></span></a>
+    <a href="/FilterSort?skip=@next@qStrFlt" class="btn btn-success"><span class="glyphicon glyphicon-arrow-down"></span></a>
+</div>
+Gesamtanzahl der Asteroiden: @Model.fss.Count()
+<table class="table table-striped">
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>&oslash; [km]</th>
+        <th>Sun &harr; Asteroid [AU]</th>
+        <th>Albedo</th>
+        <th>Jahr</th>
+    </tr>
+
+    @{
+        int Nr = Model.SKIP;
+    }
+    @foreach (var ast in Model.fss.Get(Model.SKIP, 20))
+    {
+        <tr>
+            <td>
+                @(Nr++)
+            </td>
+            <td>
+                @ast.Name
+            </td>
+            <td>
+                @ast.DiameterInKm
+            </td>
+            <td>
+                @ast.DistanceSunInAU
+            </td>
+            <td>
+                @ast.Albedo
+            </td>
+            <td>
+                @ast.OrbitalTimeInEarthYears
+            </td>
+        </tr>
+    }
+</table>
+
+

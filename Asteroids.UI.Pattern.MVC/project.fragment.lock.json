@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "exports": {
+    "AsteroidsBL/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/AsteroidsBL.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/AsteroidsBL.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/AsteroidsBL.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "AsteroidsDAL.CSV/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/AsteroidsDAL.CSV.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/AsteroidsDAL.CSV.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/AsteroidsDAL.CSV.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "MkPrgNet.Pattern.Repository/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/MkPrgNet.Pattern.Repository.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/MkPrgNet.Pattern.Repository.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/MkPrgNet.Pattern.Repository.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}
