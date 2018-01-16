@@ -1,0 +1,69 @@
+﻿<Window x:Class="Asteroids.UI.Pattern.MVVM.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Asteroids.UI.Pattern.MVVM.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">                
+                <GradientStop Color="black" Offset="0.9"/>
+                <GradientStop Color="White" Offset="0.3"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20px"/>
+            <RowDefinition Height="30px"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20px"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Name="mnuiFileOpen" Click="mnuiFileOpen_Click"></MenuItem>
+                <MenuItem Header="Exit" Name="mnuFileExit" Click="mnuFileExit_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <TabControl Grid.Row="2" Background="{x:Null}">
+            <TabItem Header="Log">
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <WrapPanel Grid.Row="0">
+                        <Button Name="btnClearLog" Click="btnClearLog_Click">
+                            Clear
+                        </Button>
+                        <Button Name="btnClearFib" Click="btnClearFib_Click">
+                            Reset Fibonacci
+                        </Button>
+                        <Button Name="btnTestLog" Click="btnTestLog_Click">
+                            TestLog
+                        </Button>
+                    </WrapPanel>
+                    <ListBox Name="lbxLog" Grid.Row="1"  >
+                        
+                    </ListBox>
+
+                </Grid>
+
+
+            </TabItem>
+            <TabItem Header="Import">
+
+            </TabItem>
+            <TabItem Header="Filter">
+
+            </TabItem>
+            <TabItem Header="Result">
+
+            </TabItem>
+
+        </TabControl>
+
+
+    </Grid>
+</Window>
