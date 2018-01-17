@@ -61,6 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AsteroidsCollectorMVVM.cs" />
+    <Compile Include="AsteroidsRepoMVVM.cs" />
     <Compile Include="WpfLbxLogHnd.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +103,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AsteroidsBL\AsteroidsBL.csproj">
+      <Project>{1caa5695-5061-4370-90de-183b53c4f965}</Project>
+      <Name>AsteroidsBL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AsteroidsDAL.CSV\AsteroidsDAL.CSV.csproj">
+      <Project>{d6f55c0b-3516-4098-b2d5-7a7e6db35ae4}</Project>
+      <Name>AsteroidsDAL.CSV</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MkPrgNet.Pattern.Repository\MkPrgNet.Pattern.Repository.csproj">
+      <Project>{68ef5c8f-158c-4b4f-b5f9-13f8d8d464ae}</Project>
+      <Name>MkPrgNet.Pattern.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

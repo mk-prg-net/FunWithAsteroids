@@ -4,11 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Asteroids.UI.Pattern.MVVM.WPF"
+        xmlns:astro="clr-namespace:AsteroidsBL;assembly=AsteroidsBL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="FunWithAsteroids: WPF MVVM" Height="350" Width="525">
+    <Window.Resources>
+        <!-- Die Ressourcen sind 'globale Variablen'. In der Code Behind kann via
+             this.FindResources(Key) auf die Ressource zugegriffen werden   -->
+        <local:AsteroidsCollectorMVVM x:Key="Collector"/>
+        <ObjectDataProvider x:Key="odpCollector" ObjectInstance="{StaticResource Collector}" />
+        
+        <local:AsteroidsRepoMVVM x:Key="Repo"/>        
+        <!-- Adapter für DataGridView-->
+        <ObjectDataProvider x:Key="odpRepo" ObjectInstance="{StaticResource Repo}" />
+
+        <Style x:Key="NumBox"  TargetType="TextBox">
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="Yellow"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="12pt"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="NumBoxLabel" TargetType="Label">
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            <Setter Property="MinWidth" Value="150px"/>
+        </Style>
+        
+    </Window.Resources>
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">                
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="black" Offset="0.9"/>
                 <GradientStop Color="White" Offset="0.3"/>
             </LinearGradientBrush>
@@ -26,8 +53,8 @@
             </MenuItem>
         </Menu>
 
-        <TabControl Grid.Row="2" Background="{x:Null}">
-            <TabItem Header="Log">
+        <TabControl Grid.Row="2" Background="{x:Null}" Name="tabControlMain">
+            <TabItem Header="Log" >
                 <Grid VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20px"></RowDefinition>
@@ -44,21 +71,80 @@
                             TestLog
                         </Button>
                     </WrapPanel>
-                    <ListBox Name="lbxLog" Grid.Row="1"  >
-                        
-                    </ListBox>
-
+                    <ListBox Name="lbxLog" Grid.Row="1" Background="{x:Null}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Import" Name="ImportTab">
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20px"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <TextBlock>#Asterioden:</TextBlock>
+                        <TextBox Name="tbxReadCountAsteroids" Style="{StaticResource NumBox}"
+                                 Width="100px">0</TextBox>
+                    </DockPanel>
+                    <DataGrid Grid.Row="1" 
+                              Name="GrdCollected" 
+                              Background="{x:Null}"
+                              ItemsSource="{Binding Source={StaticResource Collector}, Path=Asteroids}" />
                 </Grid>
 
-
             </TabItem>
-            <TabItem Header="Import">
-
+            <TabItem Header="Filter" Background="{x:Null}">
+                <StackPanel Orientation="Vertical">
+                    <DockPanel>
+                        <Button Name="btnNewFilter" Click="btnNewFilter_Click">New Filter</Button>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Style="{StaticResource NumBoxLabel}">min D [km]</Label>
+                        <TextBox Name="minD" Width="100" Style="{StaticResource NumBox}" Text="{Binding Source={StaticResource Repo}, Path=MinDia}"/>
+                        <Label Style="{StaticResource NumBoxLabel}">max D [km]</Label>
+                        <TextBox Name="maxD" Width="100" Style="{StaticResource NumBox}" Text="{Binding Source={StaticResource Repo}, Path=MaxDia}"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Style="{StaticResource NumBoxLabel}">min A&lt;-&gt;Sun [AU]</Label>
+                        <TextBox Name="minDistSun" Width="100" Style="{StaticResource NumBox}" Text="{Binding Source={StaticResource Repo}, Path=MinDist}"/>
+                        <Label Style="{StaticResource NumBoxLabel}">max A&lt;-&gt;Sun [AU]</Label>
+                        <TextBox Name="maxDistSun" Width="100" Style="{StaticResource NumBox}" Text="{Binding Source={StaticResource Repo}, Path=MinDist}"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Button Name="btnDefSort" Click="btnDefSort_Click">Def Sort</Button>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Style="{StaticResource NumBoxLabel}">Sort D Asc</Label>
+                        <RadioButton Name="SortDiameterAsc" Width="100" IsChecked="{Binding Source={StaticResource Repo}, Path=SortDia}"  VerticalAlignment="Center"/>
+                        <Label Style="{StaticResource NumBoxLabel}">Sort D Desc</Label>
+                        <RadioButton Name="SortDiameterDesc" Width="100" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Style="{StaticResource NumBoxLabel}">Sort A&lt;-&gt;Sun Asc</Label>
+                        <RadioButton Name="SortDistSunAsc" Width="100" IsChecked="{Binding Source={StaticResource Repo}, Path=SortDist}" VerticalAlignment="Center"/>
+                        <Label Style="{StaticResource NumBoxLabel}">Sort A&lt;-&gt;Sun Desc</Label>
+                        <RadioButton Name="SortDistSunDesc" Width="100" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Button Name="btnFilterAndSort" Click="btnFilterAndSort_Click">EXE</Button>
+                    </DockPanel>
+                </StackPanel>   
             </TabItem>
-            <TabItem Header="Filter">
+            <TabItem Header="Result" Background="{x:Null}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30px"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Label Style="{StaticResource NumBoxLabel}">#Asteroiden</Label>
+                        <Label Name="CountFilteredAsteroids" Content="{Binding Source={StaticResource Repo}, Path=AsteroidsCount}" Background="Black" Foreground="Yellow" Style="{StaticResource NumBoxLabel}"/>
+                    </DockPanel>
+                    <DataGrid Name="GrdFilteredSorted"
+                              Grid.Row="1"
+                          ItemsSource="{Binding Source={StaticResource Repo}, Path=Get}"/>
+                </Grid>
+                
 
-            </TabItem>
-            <TabItem Header="Result">
 
             </TabItem>
 

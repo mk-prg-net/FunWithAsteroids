@@ -41,6 +41,7 @@ namespace Asteroids.UI.Pattern.Presenter.WinForm
                 // Erfassung vorbereiten
                 mko.TraceHlp.ThrowArgExIfNot(File.Exists(openAsteroidsCSV.FileName), "Die Datei " + openAsteroidsCSV.FileName + " existiert nicht");
 
+                
                 collector = new AsteroidsBL.AsteroidsCollector();
 
                 //UpdateCollectorCounterTimer.Enabled = true;

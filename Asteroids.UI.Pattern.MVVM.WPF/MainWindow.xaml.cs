@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.IO;
+
 namespace Asteroids.UI.Pattern.MVVM.WPF
 {
     /// <summary>
@@ -23,12 +25,27 @@ namespace Asteroids.UI.Pattern.MVVM.WPF
 
         mko.Log.LogServer log = new mko.Log.LogServer();
 
+
+        AsteroidsCollectorMVVM mvvmCollector;
+        AsteroidsRepoMVVM mvvmRepo;
+
+        AsteroidsBL.IAsteroidsCollector collector;
+        //AsteroidsBL.IAsteroidsRepository repo;
+
+        System.Timers.Timer clock = new System.Timers.Timer(500.0);
+
+        IEnumerable<AsteroidsBL.IAsteroid> Asteroids = new AsteroidsBL.IAsteroid[] { };
+
+
         public MainWindow()
         {
             InitializeComponent();
 
             var hnd = new WpfLbxLogHnd(lbxLog);
             log.registerLogHnd(hnd);
+
+            mvvmCollector = ((AsteroidsCollectorMVVM)FindResource("Collector"));
+            mvvmRepo = ((AsteroidsRepoMVVM)FindResource("Repo"));
         }
 
         private void mnuFileExit_Click(object sender, RoutedEventArgs e)
@@ -36,16 +53,80 @@ namespace Asteroids.UI.Pattern.MVVM.WPF
             Application.Current.Shutdown();
         }
 
-        private void mnuiFileOpen_Click(object sender, RoutedEventArgs e)
+        private async void mnuiFileOpen_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.Multiselect = false;
+            tabControlMain.SelectedItem = ImportTab;
 
-            if(dlg.ShowDialog()?? false)
+            var openAsteroidsCSV = new Microsoft.Win32.OpenFileDialog();
+            openAsteroidsCSV.Multiselect = false;
+
+            if(openAsteroidsCSV.ShowDialog()?? false)
             {
-                MessageBox.Show("Selected Filename: " + dlg.FileName);
+                //MessageBox.Show("Selected Filename: " + openAsteroidsCSV.FileName);
+
+                // Erfassung vorbereiten
+                mko.TraceHlp.ThrowArgExIfNot(File.Exists(openAsteroidsCSV.FileName), "Die Datei " + openAsteroidsCSV.FileName + " existiert nicht");
+
+                ((AsteroidsCollectorMVVM)FindResource("Collector")).StartCollect();
+                collector = ((AsteroidsCollectorMVVM)FindResource("Collector")).Collector;
+
+                clock.AutoReset = true;
+                clock.Elapsed += new System.Timers.ElapsedEventHandler(clock_Elapsed);
+                clock.Enabled = true;
+
+                log.Log(mko.Log.RC.CreateStatus("Einlesevorgang gestartet"));
+
+                await Task.Run(() =>
+                {
+                    var reader = new AsteroidsDAL.CSV.AsteroidsCSVReader(openAsteroidsCSV.FileName, 2);
+
+                    // geht nicht aus einem anderen Thread
+                    //lblImportCsvCountAsteroids.Text = "HAllo";
+
+                    while (!reader.EOF)
+                    {
+                        collector.Add(reader.Read());
+                    }
+                });
+
+                clock.Stop();
+
+                //UpdateCollectorCounterTimer_Tick(null, null);
+
+                mvvmRepo.Repo = collector.CreateRepository();
+                //presenter = new Impl.PresenterV1(this, repo);
+
+                log.Log(mko.Log.RC.CreateStatus("Einlesen erfolgreich beendet"));
+
             }
         }
+
+        void clock_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Das Setzen der Label- Eigenschaft wird an den UI Thread delegiert.
+            // Dieses Vorgehen wird durch das STA erzwungen
+            //Dispatcher.Invoke(
+            //    new Action<string>(time => lblStatusTime.Content = time),
+            //    new object[] { DateTime.Now.ToLongTimeString() });
+
+            //// Weiterschalten des ProgressBar
+            Dispatcher.Invoke(
+                //new Action<int>(sec => { progress.Value = (double)sec; Zeiger.X2 = Zx(sec); Zeiger.Y2 = Zy(sec); }),
+                new Action(() => {                    
+                    tbxReadCountAsteroids.Text = collector.Count.ToString("D10");
+
+                    // Die Aktualisierung des Ziels der Datenbindung wird gestartet
+                    GrdCollected.GetBindingExpression(DataGrid.ItemsSourceProperty).UpdateTarget();                    
+
+                }),
+                new object[] {});
+
+            // Direkter Zugriff aus dem Timer- Thread auf die Elemente der Oberfläche 
+            // ist verboten !!
+            //Zeiger.X2 = Zx(sekunde); 
+            //Zeiger.Y2 = Zy(sekunde);
+        }
+
 
         private void btnClearLog_Click(object sender, RoutedEventArgs e)
         {
@@ -72,6 +153,24 @@ namespace Asteroids.UI.Pattern.MVVM.WPF
             fib_i = 1;
             fib_ii = 2;
             log.Log(mko.Log.RC.CreateStatus("Fibonacci reset"));
+        }
+
+        private void btnNewFilter_Click(object sender, RoutedEventArgs e)
+        {
+            mvvmRepo.NewFilter();
+        }
+
+        private void btnDefSort_Click(object sender, RoutedEventArgs e)
+        {
+            mvvmRepo.NewSortOrderBuilder();
+        }
+
+        private void btnFilterAndSort_Click(object sender, RoutedEventArgs e)
+        {
+            mvvmRepo.NewFilteredSortedSet();
+            CountFilteredAsteroids.GetBindingExpression(Label.ContentProperty).UpdateTarget();
+            GrdFilteredSorted.GetBindingExpression(DataGrid.ItemsSourceProperty).UpdateTarget();
+
         }
     }
 }
